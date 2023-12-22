@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    ul,
+    li {
+      list-style: none;
+    }
+
+    #bos {
+      width: 1000px;
+      height: 1200px;
+      margin: auto;
+    }
+
+    #box {
+      width: 1000px;
+      margin: auto;
+    }
+
+    #box ul {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+    }
+
+    #box li {
+      width: 170px;
+      height: 240px;
+      display: flex;
+      align-content: flex-start;
+      flex-wrap: wrap;
+      flex-direction: row;
+      border: 1px solid #ccc;
+    }
+
+    #box li img {
+      width: 170px;
+      height: 150px;
+      margin-bottom: 7px;
+    }
+
+    #logo {
+      width: 40px;
+      height: 20px;
+      margin-left: 5px;
+      background-color: rgb(225, 80, 193);
+      border-radius: 23px;
+      font-size: 10px;
+      text-align: center;
+      line-height: 20px;
+      color: white;
+    }
+
+    #box li h4 {
+      margin-left: 5px;
+    }
+
+    #box li p {
+      font-size: 10px;
+      margin-top: 5px;
+      margin-left: 5px;
+      color: #ccc;
+    }
+
+    #box li span {
+      font-size: 10px;
+      color: #b5aeae;
+      margin: 5px;
+    }
+
+    #nav {
+      width: 1000px;
+      height: 50px;
+      margin-top: 10px;
+      border-bottom: 2px solid #ccc;
+      line-height: 50px;
+    }
+
+    #nav p {
+      width: 160px;
+      height: 50px;
+      text-align: center;
+      font-weight: bold;
+      color: rgb(221, 48, 127);
+      border-bottom: 2px solid rgb(221, 48, 127);
+    }
+
+    #textbox {
+      width: 1000px;
+      height: 50px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-content: space-around;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    #textbox #logo1 {
+      width: 15px;
+      height: 15px;
+      border: 1px solid greenyellow;
+      font-size: 10px;
+      text-align: center;
+      line-height: 15px;
+      color: greenyellow;
+      margin-top: 3px;
+    }
+
+    #p1 {
+      font-size: 16px;
+    }
+
+    table {
+      width: 1000px;
+      min-height: 200px;
+      border: 1px solid black;
+      margin-top: 20px;
+      text-align: center;
+      border-collapse: collapse;
+    }
+
+    td,
+    th {
+      border: 1px solid black;
+    }
+
+    tbody img {
+      width: 100px;
+      height: 100px;
+    }
+
+    tbody button {
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+
+    tbody button:active {
+      background-color: aliceblue;
+    }
+
+    #footer {
+      width: 100%;
+      height: 130px;
+      border: 1px solid #666;
+      margin-top: 30px;
+    }
+
+    #footer-top {
+      width: 100%;
+      height: 80px;
+    }
+
+    #footer-top p {
+      display: inline-block;
+      line-height: 80px;
+    }
+
+    #footer-bottom {
+      width: 100%;
+      height: 50px;
+      background-color: #e7e7e7;
+      line-height: 50px;
+    }
+
+    #footer-bottom button {
+      width: 150px;
+      height: 50px;
+      color: white;
+      float: right;
+      background-color: #ff31a3;
+      border: none;
+    }
+
+    #time-a {
+      margin: 0 15px 0 650px;
+    }
+  </style>
+
+  <body>
+    <div id="bos">
+      <div id="box">
+        <ul>
+          <li v-for="(item,index) in arr" @click="addFun(index)">
+            <img :src="item.img" alt="" />
+            <div id="logo">热卖价</div>
+            <h4>￥{{item.nowprice}}</h4>
+            <p><del>￥{{item.oldprice}}</del></p>
+            <p>2.9折</p>
+            <span>{{item.jianjie}}</span>
+          </li>
+        </ul>
+      </div>
+      <div id="boxson">
+        <div id="nav">
+          <p>特卖商品 19:18</p>
+        </div>
+        <div id="textbox">
+          <p id="p1">配送至 <b>广州市</b></p>
+          “
+          <div id="logo1">√</div>
+          ”
+          <p>| 勾选商品即可锁定库存20分钟，倒计时内不用担心商品被抢走~</p>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th colspan="3">商品</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody v-for="(item,index) in arr1">
+          <tr>
+            <td>
+              <input
+                type="checkbox"
+                checked="item.stats"
+                @click="getstarts(index)"
+              />
+            </td>
+            <td><img :src="item.img" alt="" /></td>
+            <td>
+              <pre>{{item.jianjie}}</pre>
+            </td>
+            <td>
+              <span style="color: rgb(221, 48, 127)">￥{{item.nowprice}}</span>
+            </td>
+            <td>
+              <button @click="lower(index)">-</button
+              >&emsp;<span>{{item.num}}</span>&emsp;<button
+                @click="grow(index)"
+              >
+                +
+              </button>
+            </td>
+            <td>
+              <button
+                style="width: 80px; height: 30px; border-radius: 10px"
+                @click="delFun(index)"
+              >
+                删除
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="footer">
+        <div id="footer-top"></div>
+        <div id="footer-bottom">
+          <span id="time-a">总金额</span>
+          <span id="time" v-text="total"></span>
+          <button id="#footer-bottom" @click="foot()">立即结算</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        el: "#bos",
+        data() {
+          return {
+            total: 0,
+            arr: [
+              {
+                img: "https://img1.baidu.com/it/u=1708905675,2285896150&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=743",
+                nowprice: 198,
+                oldprice: 684,
+                jianjie:
+                  "雪中飞秋冬季纯色简约摇粒绒保暖外套女百搭休闲时尚立领开衫上衣",
+                stats: true,
+              },
+              {
+                img: "https://img0.baidu.com/it/u=2014413932,4077838980&fm=253&fmt=auto&app=138&f=JPEG?w=563&h=500",
+                nowprice: 298,
+                oldprice: 984,
+                jianjie:
+                  "雪中飞秋冬季纯色简约摇粒绒保暖外套女百搭休闲时尚立领开衫上衣",
+                stats: true,
+              },
+              {
+                img: "https://img0.baidu.com/it/u=146793830,3859190236&fm=253&fmt=auto&app=138&f=PNG?w=500&h=500",
+                nowprice: 98,
+                oldprice: 184,
+                jianjie:
+                  "雪中飞秋冬季纯色简约摇粒绒保暖外套女百搭休闲时尚立领开衫上衣",
+                stats: true,
+              },
+              {
+                img: "https://img1.baidu.com/it/u=1546483124,1286798525&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500",
+                nowprice: 298,
+                oldprice: 884,
+                jianjie:
+                  "雪中飞秋冬季纯色简约摇粒绒保暖外套女百搭休闲时尚立领开衫上衣",
+                stats: true,
+              },
+              {
+                img: "https://img2.baidu.com/it/u=2093456566,235756447&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=750",
+                nowprice: 398,
+                oldprice: 484,
+                jianjie:
+                  "雪中飞秋冬季纯色简约摇粒绒保暖外套女百搭休闲时尚立领开衫上衣",
+                stats: true,
+              },
+            ],
+            arr1: [],
+          };
+        },
+        methods: {
+          addFun(index) {
+            this.arr1.push({
+              img: this.arr[index].img,
+              nowprice: this.arr[index].nowprice,
+              jianjie: this.arr[index].jianjie,
+              num: 1,
+              stats: this.arr[index].stats,
+            });
+            this.cont();
+          },
+          delFun(index) {
+            this.arr1.splice(index, 1);
+            this.cont();
+          },
+          grow(index) {
+            this.arr1[index].num++;
+            if (this.arr1[0].stats) {
+              this.cont();
+            }
+          },
+          lower(index) {
+            if (this.arr1[index].num == 1) {
+              return alert("至少买一件，要不删除");
+            }
+            this.arr1[index].num--;
+            if (this.arr1[0].stats) {
+              this.cont();
+            }
+          },
+          cont() {
+            this.total = this.arr1.reduce((sum, item) => {
+              return sum + item.nowprice * item.num;
+            }, 0);
+          },
+          getstarts(index) {
+            this.arr1[index].stats = !this.arr1[index].stats;
+            console.log(this.arr1[index].stats);
+            if (!this.arr1[index].stats) {
+              this.total = this.total - this.arr1[index].nowprice;
+              console.log(this.total);
+            } else {
+              this.total = this.total + this.arr1[index].nowprice;
+              console.log(this.total);
+            }
+          },
+          foot() {
+            this.arr1 = [];
+            alert(`您已支付${this.total}元`);
+            this.total = 0;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
